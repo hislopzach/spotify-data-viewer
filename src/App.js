@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Typography from "@material-ui/core/Typography";
+import { Button } from "@material-ui/core";
+import axios from "axios";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.css";
+import Favorites from "./Favorites";
 
 function App() {
+  const clientId = "e161d1dc280f418fa572dc25328e38d3";
+  const redirectUrl = "http://localhost:3000/favorites";
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Switch>
+          <Route path="/favorites">
+            <Favorites />
+          </Route>
+          <Route path="/">
+            <header className="App-header">
+              <Typography variant="h2" component="h2" gutterBottom>
+                Spotify Favorites Viewer
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                href={`https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=user-top-read&response_type=token`}
+              >
+                Authenticate with Spotify
+              </Button>
+            </header>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
