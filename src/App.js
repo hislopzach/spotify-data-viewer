@@ -2,13 +2,13 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Favorites from "./Favorites";
 
 function App() {
   const clientId = "e161d1dc280f418fa572dc25328e38d3";
-  const redirectUrl = "http://localhost:3000/favorites";
+  const redirectUrl = "https://zachspotify.herokuapp.com/";
   return (
     <div className="App">
       <Router>

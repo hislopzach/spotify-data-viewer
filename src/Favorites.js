@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Grid, CircularProgress, Switch } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import { useQuery } from "react-query";
 
 import Tracks from "./Tracks";
