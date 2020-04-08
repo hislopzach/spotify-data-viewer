@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { Grid, CircularProgress, Switch } from "@material-ui/core";
+import {
+  Grid,
+  CircularProgress,
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
+  AppBar,
+  Toolbar,
+  Typography,
+  Hidden,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useQuery } from "react-query";
 
@@ -26,19 +37,21 @@ const useStyles = makeStyles((theme) => ({
     width: 320,
     height: 320,
   },
-  switch: {
-    margin: "auto auto",
+  toolbar: {
+    // minHeight: 100,
   },
 }));
 
 const Favorites = () => {
   const classes = useStyles();
-  const [showTracks, setShowTracks] = useState(true);
+  const [category, setCategory] = useState("artists");
+  const [timeRange, setTimeRange] = useState("long_term");
+  const [numVisible, setNumVisible] = useState(50);
 
   const getTokenFromHash = (hash) => {
     return hash.split("&")[0].substr(14);
   };
-  const getArtists = async (key, limit = 50, timeRange = "long_term") => {
+  const getArtists = async (key, timeRange, limit) => {
     return await getFavoriteArtists(
       limit,
       timeRange,
@@ -46,7 +59,7 @@ const Favorites = () => {
     );
   };
 
-  const getTracks = async (key, limit = 50, timeRange = "long_term") => {
+  const getTracks = async (key, timeRange, limit) => {
     return await getFavoriteTracks(
       limit,
       timeRange,
@@ -54,35 +67,77 @@ const Favorites = () => {
     );
   };
 
-  const handleContentSwitch = (event) => {
-    setShowTracks((prev) => !prev);
-  };
-
   const { data: artists } = useQuery({
-    queryKey: "artists",
+    queryKey: ["artists", timeRange],
+    variables: [numVisible],
     queryFn: getArtists,
   });
   const { data: tracks } = useQuery({
-    queryKey: "tracks",
+    queryKey: ["tracks", timeRange],
+    variables: [numVisible],
     queryFn: getTracks,
   });
   return (
     <header className="App-header">
-      <Grid container spacing={2} className={classes.grid}>
-        <Grid
-          item
-          container
-          spacing={1}
-          justify="center"
-          className={classes.switch}
-        >
-          <Grid item>Artists</Grid>
-          <Grid item>
-            <Switch checked={showTracks} onChange={handleContentSwitch} />
+      <AppBar position="fixed" color="primary" variant="elevation">
+        <Toolbar className={classes.toolbar}>
+          <Grid container justify="center" spacing={5}>
+            <Grid item lg={9}>
+              <Hidden mdDown>
+                <Typography variant="h3" align="center">
+                  Favorite {category === "artists" ? "Artists" : "Songs"}
+                </Typography>
+              </Hidden>
+            </Grid>
+            <Grid item xs="auto">
+              <FormControl>
+                <InputLabel id="category" htmlFor="category-picker">
+                  Category
+                </InputLabel>
+                <Select
+                  labelId="category"
+                  value={category}
+                  onChange={(event) => setCategory(event.target.value)}
+                >
+                  <MenuItem value="artists">Artists</MenuItem>
+                  <MenuItem value="tracks">Songs</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs="auto">
+              <FormControl>
+                <InputLabel id="timeRange">Time Range</InputLabel>
+                <Select
+                  value={timeRange}
+                  labelId="timeRange"
+                  onChange={(event) => setTimeRange(event.target.value)}
+                >
+                  <MenuItem value="short_term">Short Term</MenuItem>
+                  <MenuItem value="medium_term">Medium Term</MenuItem>
+                  <MenuItem value="long_term">Long Term</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            {/* <Grid item>
+              <InputLabel  id="numVisible">
+                Visible
+              </InputLabel>
+              <Select
+                value={numVisible}
+                labelId="numVisible"
+                onChange={(event) => setNumVisible(event.target.value)}
+              >
+                <MenuItem value={10}>10</MenuItem>
+                <MenuItem value={25}>25</MenuItem>
+                <MenuItem value={50}>50</MenuItem>
+              </Select>
+            </Grid> */}
           </Grid>
-          <Grid item>Tracks</Grid>
-        </Grid>
-        {showTracks ? (
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
+      <Grid container spacing={2} justify="center" className={classes.grid}>
+        {category === "tracks" ? (
           tracks ? (
             <Tracks tracks={tracks} classes={classes} />
           ) : (
