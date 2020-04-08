@@ -6,7 +6,7 @@ const Tracks = ({ tracks, classes }) => {
   return (
     <>
       {tracks.items.map((t) => (
-        <Grid key={t.uri} item lg={3} sm={6} xs={12}>
+        <Grid key={t.uri} item xs="auto">
           <Card className={classes.card}>
             <CardMedia className={classes.media}>
               <img

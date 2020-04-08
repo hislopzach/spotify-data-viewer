@@ -6,7 +6,7 @@ const Artists = ({ artists, classes }) => {
   return (
     <>
       {artists.items.map((a) => (
-        <Grid key={a.uri} item lg={3} sm={6} xs={12}>
+        <Grid key={a.uri} item xs="auto">
           <Card className={classes.card}>
             <CardMedia className={classes.media}>
               <img
