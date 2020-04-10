@@ -9,7 +9,7 @@ import Favorites from "./Favorites";
 
 function App() {
   const clientId = "e161d1dc280f418fa572dc25328e38d3";
-  const redirectUrl = "https://zachspotify.herokuapp.com/favorites";
+  const redirectUrl = "https://spotify-favorites-viewer.web.app/favorites";
   const theme = React.useMemo(() =>
     createMuiTheme({
       palette: {
