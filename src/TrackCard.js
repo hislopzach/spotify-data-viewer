@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CoverArtCard from "./CoverArtCard";
 
-const TrackCard = ({ track, index }) => {
+const TrackCard = ({ track, rank }) => {
   const description = `${track.artists[0].name} - ${track.album.name}`;
   const image = track.album.images[1].url;
 
@@ -9,7 +9,7 @@ const TrackCard = ({ track, index }) => {
     <CoverArtCard
       name={track.name}
       description={description}
-      rank={index}
+      rank={rank}
       image={image}
     />
   );
