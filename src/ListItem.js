@@ -14,18 +14,19 @@ const ListItem = ({ name, description, rank }) => {
   const content = `#${rank} - ${name}:  ${description}`;
   return (
     <Card className={classes.card}>
-      <Grid container justify="evenly-space" spacing={2}>
-        <Grid item>
-          <Typography variant="h3">#{rank}</Typography>
+      <CardContent>
+        <Grid container justify="evenly-space" spacing={2}>
+          <Grid item>
+            <Typography variant="h4">#{rank}</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h5">{name}</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h5">{description}</Typography>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Typography variant="h5">{name}</Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="h5">{description}</Typography>
-        </Grid>
-      </Grid>
-      <CardContent>{content}</CardContent>
+      </CardContent>
     </Card>
   );
 };
