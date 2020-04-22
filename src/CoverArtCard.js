@@ -40,7 +40,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CoverArtCard = ({ name, description, image, rank }) => {
+const CoverArtCard = ({
+  name,
+  description,
+  image,
+  rank,
+  hideExpand = false,
+}) => {
   const [expanded, setExpanded] = useState(false);
   const styles = useStyles();
 
@@ -51,17 +57,21 @@ const CoverArtCard = ({ name, description, image, rank }) => {
       </CardMedia>
       <CardContent className={styles.cardContent}>
         <Typography variant="h5">{`#${rank + 1} ${name}`}</Typography>
-        <IconButton
-          className={expanded ? styles.expandOpen : styles.expand}
-          onClick={() => setExpanded((prev) => !prev)}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-        <Collapse in={expanded}>
-          <Typography variant="subtitle1">{description}</Typography>
-        </Collapse>
+        {hideExpand ? null : (
+          <>
+            <IconButton
+              className={expanded ? styles.expandOpen : styles.expand}
+              onClick={() => setExpanded((prev) => !prev)}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+            <Collapse in={expanded}>
+              <Typography variant="subtitle1">{description}</Typography>
+            </Collapse>
+          </>
+        )}
       </CardContent>
     </Card>
   );
