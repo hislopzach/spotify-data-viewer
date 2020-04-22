@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CoverArtCard from "./CoverArtCard";
 
-const ArtistCard = ({ artist, index }) => {
+const ArtistCard = ({ artist, rank }) => {
   const description = artist.name;
   const image = artist.images[1].url;
 
@@ -9,7 +9,7 @@ const ArtistCard = ({ artist, index }) => {
     <CoverArtCard
       name={artist.name}
       description={description}
-      rank={index}
+      rank={rank}
       image={image}
       hideExpand
     />
