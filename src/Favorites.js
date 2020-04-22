@@ -44,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Favorites = () => {
   const classes = useStyles();
-  const [category, setCategory] = useState("tracks");
-  const [timeRange, setTimeRange] = useState("long_term");
+  const [category, setCategory] = useState("artists");
+  const [timeRange, setTimeRange] = useState("short_term");
   const [numVisible, setNumVisible] = useState(50);
 
   const getTokenFromHash = (hash) => {
