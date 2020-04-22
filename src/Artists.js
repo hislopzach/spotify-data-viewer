@@ -1,24 +1,13 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Grid } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
+import { Grid } from "@material-ui/core";
+import ArtistCard from "./ArtistCard";
 
-const Artists = ({ artists, classes }) => {
+const Artists = ({ artists }) => {
   return (
     <>
-      {artists.items.map((a) => (
+      {artists.items.map((a, index) => (
         <Grid key={a.uri} item xs="auto">
-          <Card className={classes.card}>
-            <CardMedia className={classes.media}>
-              <img
-                className={classes.media}
-                src={a.images[1].url}
-                alt={a.name}
-              />
-            </CardMedia>
-            <CardContent>
-              <Typography variant="h5">{a.name}</Typography>
-            </CardContent>
-          </Card>
+          <ArtistCard artist={a} index={index} />
         </Grid>
       ))}
     </>
