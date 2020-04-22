@@ -7,7 +7,7 @@ const Tracks = ({ tracks }) => {
   return (
     <>
       {tracks.items.map((t, index) => {
-        if (index <= 4) {
+        if (index < 10) {
           return (
             <Grid key={t.uri} item xs="auto">
               <TrackCard track={t} rank={index + 1} />
