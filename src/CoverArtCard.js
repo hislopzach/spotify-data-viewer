@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   card: {
-    width: 320,
+    // minHeight: "100%",
+    width: 375,
+    textAlign: "center",
+    wordWrap: "break-word",
     margin: "auto",
     marginBottom: "0.5em",
     transition: "0.3s",
@@ -31,12 +34,10 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
     },
   },
-  cardDetails: {
-    paddingBottom: 0,
-  },
   media: {
-    width: 320,
-    height: 320,
+    width: "100%",
+    objectFit: "cover",
+    height: 200,
   },
 }));
 
@@ -55,12 +56,13 @@ const CoverArtCard = ({
       <CardMedia className={styles.media}>
         <img className={styles.media} src={image} alt={name}></img>
       </CardMedia>
-      <CardContent className={styles.cardContent}>
-        <Typography variant="h5">{`#${rank + 1} ${name}`}</Typography>
+      <CardContent className={styles.cardDetails} style={{ padding: "4px" }}>
+        <Typography variant="subtitle1">{`${rank}. ${name}`}</Typography>
         {hideExpand ? null : (
           <>
             <IconButton
               className={expanded ? styles.expandOpen : styles.expand}
+              style={{ padding: 0 }}
               onClick={() => setExpanded((prev) => !prev)}
               aria-expanded={expanded}
               aria-label="show more"
