@@ -1,28 +1,10 @@
-import React, { useState } from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  IconButton,
-  Collapse,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import React from "react";
+import { Card, CardMedia, CardContent } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
   card: {
-    // minHeight: "100%",
     width: 375,
     textAlign: "center",
     wordWrap: "break-word",
@@ -41,14 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CoverArtCard = ({
-  name,
-  description,
-  image,
-  rank,
-  hideExpand = false,
-}) => {
-  const [expanded, setExpanded] = useState(false);
+const CoverArtCard = ({ name, image, rank }) => {
   const styles = useStyles();
 
   return (
@@ -58,22 +33,6 @@ const CoverArtCard = ({
       </CardMedia>
       <CardContent className={styles.cardDetails} style={{ padding: "4px" }}>
         <Typography variant="subtitle1">{`${rank}. ${name}`}</Typography>
-        {hideExpand ? null : (
-          <>
-            <IconButton
-              className={expanded ? styles.expandOpen : styles.expand}
-              style={{ padding: 0 }}
-              onClick={() => setExpanded((prev) => !prev)}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-            <Collapse in={expanded}>
-              <Typography variant="subtitle1">{description}</Typography>
-            </Collapse>
-          </>
-        )}
       </CardContent>
     </Card>
   );
