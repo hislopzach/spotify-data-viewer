@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import {
   Grid,
   CircularProgress,
-  FormControl,
   MenuItem,
   Select,
-  InputLabel,
   AppBar,
   Toolbar,
   Typography,
@@ -40,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Favorites = () => {
   const styles = useStyles();
-  const [category, setCategory] = useState("artists");
   const [tabValue, setTabValue] = useState(0);
   const [timeRange, setTimeRange] = useState("short_term");
   const [numVisible, setNumVisible] = useState(50);
@@ -80,24 +77,27 @@ const Favorites = () => {
   });
   return (
     <>
-      <AppBar
-        position="fixed"
-        color="primary"
-        variant="elevation"
-        title="Spotify Favorites Viewer"
-        className={styles.appBar}
-      >
-        <Toolbar>
-          <Grid container justify="center">
-            <Grid item>
-              <Typography variant="h3" align="center">
-                Spotify Favorites Viewer
-              </Typography>
+      <Hidden mdDown>
+        >
+        <AppBar
+          position="fixed"
+          color="primary"
+          variant="elevation"
+          title="Spotify Favorites Viewer"
+          className={styles.appBar}
+        >
+          <Toolbar>
+            <Grid container justify="center">
+              <Grid item>
+                <Typography variant="h3" align="center">
+                  Spotify Favorites Viewer
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
+          </Toolbar>
+        </AppBar>
+        <Toolbar />
+      </Hidden>
       <Grid container justify="center" className={styles.grid} spacing={2}>
         <Grid item xs={6}>
           <Paper>
@@ -124,7 +124,7 @@ const Favorites = () => {
         </Grid>
       </Grid>
       <Grid container spacing={2} justify="center" className={styles.grid}>
-        {tabValue == 0 ? (
+        {tabValue === 0 ? (
           tracks ? (
             <Tracks tracks={tracks} />
           ) : (
