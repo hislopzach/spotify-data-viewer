@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import TrackCard from "./TrackCard";
-import TrackListItem from "./TrackListItem";
 
 const Tracks = ({ tracks }) => {
   return (
