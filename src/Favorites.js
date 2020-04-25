@@ -10,6 +10,9 @@ import {
   Toolbar,
   Typography,
   Hidden,
+  Paper,
+  Tabs,
+  Tab,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useQuery } from "react-query";
@@ -23,28 +26,22 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     marginTop: "1em",
   },
-  card: {
-    width: 320,
-    margin: "auto",
-    marginBottom: "0.5em",
-    transition: "0.3s",
-    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
-    "&:hover": {
-      boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
-    },
-  },
-  media: {
-    width: 320,
-    height: 320,
-  },
   appBar: {
     maxWidth: "100%",
+  },
+  selectPaper: {
+    height: 48,
+    paddingLeft: 6,
+  },
+  select: {
+    height: 48,
   },
 }));
 
 const Favorites = () => {
   const styles = useStyles();
   const [category, setCategory] = useState("artists");
+  const [tabValue, setTabValue] = useState(0);
   const [timeRange, setTimeRange] = useState("short_term");
   const [numVisible, setNumVisible] = useState(50);
 
@@ -67,6 +64,10 @@ const Favorites = () => {
     );
   };
 
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
   const { data: artists } = useQuery({
     queryKey: ["artists", timeRange],
     variables: [numVisible],
@@ -83,59 +84,54 @@ const Favorites = () => {
         position="fixed"
         color="primary"
         variant="elevation"
+        title="Spotify Favorites Viewer"
         className={styles.appBar}
       >
-        <Toolbar className={styles.toolbar}>
-          <Grid container justify="center" spacing={5}>
-            <Grid item lg={9}>
-              <Hidden mdDown>
-                <Typography variant="h3" align="center">
-                  Favorite {category === "artists" ? "Artists" : "Songs"}
-                </Typography>
-              </Hidden>
-            </Grid>
-            <Grid item xs="auto">
-              <FormControl>
-                <InputLabel id="category" htmlFor="category-picker">
-                  Category
-                </InputLabel>
-                <Select
-                  labelId="category"
-                  value={category}
-                  onChange={(event) => setCategory(event.target.value)}
-                >
-                  <MenuItem value="artists">Artists</MenuItem>
-                  <MenuItem value="tracks">Songs</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs="auto">
-              <FormControl>
-                <InputLabel id="timeRange">Time Range</InputLabel>
-                <Select
-                  value={timeRange}
-                  labelId="timeRange"
-                  onChange={(event) => setTimeRange(event.target.value)}
-                >
-                  <MenuItem value="short_term">Short Term</MenuItem>
-                  <MenuItem value="medium_term">Medium Term</MenuItem>
-                  <MenuItem value="long_term">Long Term</MenuItem>
-                </Select>
-              </FormControl>
+        <Toolbar>
+          <Grid container justify="center">
+            <Grid item>
+              <Typography variant="h3" align="center">
+                Spotify Favorites Viewer
+              </Typography>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
       <Toolbar />
+      <Grid container justify="center" className={styles.grid} spacing={2}>
+        <Grid item xs={6}>
+          <Paper>
+            <Tabs value={tabValue} centered onChange={handleTabChange}>
+              <Tab label="Tracks" />
+              <Tab label="Artists" />
+            </Tabs>
+          </Paper>
+        </Grid>
+        <Grid item xs="auto">
+          <Paper className={styles.selectPaper}>
+            <Select
+              className={styles.select}
+              value={timeRange}
+              labelId="timeRange"
+              disableUnderline
+              onChange={(event) => setTimeRange(event.target.value)}
+            >
+              <MenuItem value="short_term">Short Term</MenuItem>
+              <MenuItem value="medium_term">Medium Term</MenuItem>
+              <MenuItem value="long_term">Long Term</MenuItem>
+            </Select>
+          </Paper>
+        </Grid>
+      </Grid>
       <Grid container spacing={2} justify="center" className={styles.grid}>
-        {category === "tracks" ? (
+        {tabValue == 0 ? (
           tracks ? (
-            <Tracks tracks={tracks} classes={styles} />
+            <Tracks tracks={tracks} />
           ) : (
             <CircularProgress />
           )
         ) : artists ? (
-          <Artists artists={artists} classes={styles} />
+          <Artists artists={artists} />
         ) : (
           <CircularProgress />
         )}
