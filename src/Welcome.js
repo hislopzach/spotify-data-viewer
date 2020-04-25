@@ -7,8 +7,11 @@ const Welcome = ({ url }) => (
     <Typography variant="h2" component="h2" gutterBottom>
       Spotify Favorites Viewer
     </Typography>
+    <Typography variant="subtitle1" component="h2" gutterBottom>
+      View your favorite songs and artists
+    </Typography>
     <Button variant="contained" color="primary" href={url}>
-      Authenticate with Spotify
+      login with Spotify
     </Button>
   </header>
 );
