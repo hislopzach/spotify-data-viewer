@@ -37,13 +37,13 @@ const useStyles = makeStyles((theme) => ({
     width: 320,
     height: 320,
   },
-  toolbar: {
-    // minHeight: 100,
+  appBar: {
+    maxWidth: "100%",
   },
 }));
 
 const Favorites = () => {
-  const classes = useStyles();
+  const styles = useStyles();
   const [category, setCategory] = useState("artists");
   const [timeRange, setTimeRange] = useState("short_term");
   const [numVisible, setNumVisible] = useState(50);
@@ -78,9 +78,14 @@ const Favorites = () => {
     queryFn: getTracks,
   });
   return (
-    <header className="App-header">
-      <AppBar position="fixed" color="primary" variant="elevation">
-        <Toolbar className={classes.toolbar}>
+    <>
+      <AppBar
+        position="fixed"
+        color="primary"
+        variant="elevation"
+        className={styles.appBar}
+      >
+        <Toolbar className={styles.toolbar}>
           <Grid container justify="center" spacing={5}>
             <Grid item lg={9}>
               <Hidden mdDown>
@@ -118,38 +123,24 @@ const Favorites = () => {
                 </Select>
               </FormControl>
             </Grid>
-            {/* <Grid item>
-              <InputLabel  id="numVisible">
-                Visible
-              </InputLabel>
-              <Select
-                value={numVisible}
-                labelId="numVisible"
-                onChange={(event) => setNumVisible(event.target.value)}
-              >
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={25}>25</MenuItem>
-                <MenuItem value={50}>50</MenuItem>
-              </Select>
-            </Grid> */}
           </Grid>
         </Toolbar>
       </AppBar>
       <Toolbar />
-      <Grid container spacing={2} justify="center" className={classes.grid}>
+      <Grid container spacing={2} justify="center" className={styles.grid}>
         {category === "tracks" ? (
           tracks ? (
-            <Tracks tracks={tracks} classes={classes} />
+            <Tracks tracks={tracks} classes={styles} />
           ) : (
             <CircularProgress />
           )
         ) : artists ? (
-          <Artists artists={artists} classes={classes} />
+          <Artists artists={artists} classes={styles} />
         ) : (
           <CircularProgress />
         )}
       </Grid>
-    </header>
+    </>
   );
 };
 export default Favorites;
