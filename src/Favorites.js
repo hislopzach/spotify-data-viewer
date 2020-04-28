@@ -40,22 +40,19 @@ const Favorites = () => {
   const styles = useStyles();
   const [tabValue, setTabValue] = useState(0);
   const [timeRange, setTimeRange] = useState("short_term");
-  const [numVisible, setNumVisible] = useState(50);
 
   const getTokenFromHash = (hash) => {
     return hash.split("&")[0].substr(14);
   };
-  const getArtists = async (key, timeRange, limit) => {
+  const getArtists = async (key, timeRange) => {
     return await getFavoriteArtists(
-      limit,
       timeRange,
       getTokenFromHash(window.location.hash)
     );
   };
 
-  const getTracks = async (key, timeRange, limit) => {
+  const getTracks = async (key, timeRange) => {
     return await getFavoriteTracks(
-      limit,
       timeRange,
       getTokenFromHash(window.location.hash)
     );
@@ -67,12 +64,10 @@ const Favorites = () => {
 
   const { data: artists } = useQuery({
     queryKey: ["artists", timeRange],
-    variables: [numVisible],
     queryFn: getArtists,
   });
   const { data: tracks } = useQuery({
     queryKey: ["tracks", timeRange],
-    variables: [numVisible],
     queryFn: getTracks,
   });
   return (
@@ -116,9 +111,9 @@ const Favorites = () => {
               disableUnderline
               onChange={(event) => setTimeRange(event.target.value)}
             >
-              <MenuItem value="short_term">Short Term</MenuItem>
-              <MenuItem value="medium_term">Medium Term</MenuItem>
-              <MenuItem value="long_term">Long Term</MenuItem>
+              <MenuItem value="short_term">Recent</MenuItem>
+              <MenuItem value="medium_term">Past 6 Months</MenuItem>
+              <MenuItem value="long_term">All Time</MenuItem>
             </Select>
           </Paper>
         </Grid>
