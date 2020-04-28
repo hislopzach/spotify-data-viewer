@@ -4,10 +4,7 @@ import {
   CircularProgress,
   MenuItem,
   Select,
-  AppBar,
-  Toolbar,
-  Typography,
-  Hidden,
+  Button,
   Paper,
   Tabs,
   Tab,
@@ -19,6 +16,7 @@ import Tracks from "./Tracks";
 import Artists from "./Artists";
 
 import { getFavoriteArtists, getFavoriteTracks } from "./spotifyAPI";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -33,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
   },
   select: {
     height: 48,
+  },
+  logo: {
+    position: "fixed",
+    left: 10,
+    top: 10,
   },
 }));
 
@@ -72,27 +75,9 @@ const Favorites = () => {
   });
   return (
     <>
-      <Hidden mdDown>
-        >
-        <AppBar
-          position="fixed"
-          color="primary"
-          variant="elevation"
-          title="Spotify Favorites Viewer"
-          className={styles.appBar}
-        >
-          <Toolbar>
-            <Grid container justify="center">
-              <Grid item>
-                <Typography variant="h3" align="center">
-                  Spotify Favorites Viewer
-                </Typography>
-              </Grid>
-            </Grid>
-          </Toolbar>
-        </AppBar>
-        <Toolbar />
-      </Hidden>
+      <Link to="/" component={Button} className={styles.logo}>
+        Home
+      </Link>
       <Grid container justify="center" className={styles.grid} spacing={2}>
         <Grid item xs={6}>
           <Paper>
