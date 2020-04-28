@@ -18,6 +18,7 @@ const reactQueryConfig = {
   staleTime: 60 * 1000 * 10,
   refetchOnWindowFocus: false,
   cacheTime: 1000 * 60 * 20,
+  retry: 1,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,7 @@ function App() {
           <Router>
             <Switch>
               <Route path="/favorites">
-                <Favorites />
+                <Favorites url={authUrl} />
               </Route>
               <Route path="/">
                 <Welcome url={authUrl} />
