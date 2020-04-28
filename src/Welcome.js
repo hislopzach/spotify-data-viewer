@@ -1,19 +1,58 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
-const Welcome = ({ url }) => (
-  <header className="App-header" style={{ textAlign: "center" }}>
-    <Typography variant="h2" component="h2" gutterBottom>
-      Spotify Favorites Viewer
-    </Typography>
-    <Typography variant="subtitle1" component="h2" gutterBottom>
-      View your favorite songs and artists
-    </Typography>
-    <Button variant="contained" color="primary" href={url}>
-      login with Spotify
-    </Button>
-  </header>
-);
+const useStyles = makeStyles(() => ({
+  title: {
+    textAlign: "center",
+  },
+  button: { marginTop: "2em" },
+  copyright: {
+    position: "fixed",
+    bottom: 0,
+    color: "#838687",
+  },
+  main: {
+    backgroundColor: "#222326",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "calc(10px + 2vmin)",
+    color: "white",
+  },
+}));
+
+const Welcome = ({ url }) => {
+  const styles = useStyles();
+  return (
+    <div className={styles.main}>
+      <Typography variant="h2" gutterBottom className={styles.title}>
+        Favorites Viewer for Spotify
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        View your favorite songs and artists. None of your data is stored, ever.
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        If Neil Diamond is your #1 artist of all time, that's between you and
+        Spotify.
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        href={url}
+        className={styles.button}
+      >
+        login with Spotify
+      </Button>
+      <Typography variant="subtitle1" className={styles.copyright}>
+        Favorites Viewer for Spotify is not affiliated with Spotify. Spotify© is
+        a trademark of Spotify AB.
+      </Typography>
+    </div>
+  );
+};
 
 export default Welcome;
