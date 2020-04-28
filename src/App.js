@@ -22,7 +22,7 @@ const reactQueryConfig = {
 
 const useStyles = makeStyles((theme) => ({
   app: {
-    background: "#282c34",
+    background: "#222326",
   },
 }));
 
@@ -39,20 +39,18 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <ReactQueryConfigProvider config={reactQueryConfig}>
-        <div className={styles.app}>
-          <Container maxWidth="lg">
-            <Router>
-              <Switch>
-                <Route path="/favorites">
-                  <Favorites />
-                </Route>
-                <Route path="/">
-                  <Welcome url={authUrl} />
-                </Route>
-              </Switch>
-            </Router>
-          </Container>
-        </div>
+        <Container maxWidth="lg">
+          <Router>
+            <Switch>
+              <Route path="/favorites">
+                <Favorites />
+              </Route>
+              <Route path="/">
+                <Welcome url={authUrl} />
+              </Route>
+            </Switch>
+          </Router>
+        </Container>
       </ReactQueryConfigProvider>
     </ThemeProvider>
   );

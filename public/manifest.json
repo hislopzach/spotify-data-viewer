@@ -1,6 +1,6 @@
 {
-  "short_name": "Spotify Favorites",
-  "name": "Spotify Favorites",
+  "short_name": "Favorites Viewer",
+  "name": "Favorites Viewer for Spotify",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
