@@ -1,11 +1,7 @@
 import React from "react";
 
 import { Container } from "@material-ui/core";
-import {
-  createMuiTheme,
-  ThemeProvider,
-  makeStyles,
-} from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ReactQueryConfigProvider } from "react-query";
@@ -21,12 +17,6 @@ const reactQueryConfig = {
   retry: 1,
 };
 
-const useStyles = makeStyles((theme) => ({
-  app: {
-    background: "#222326",
-  },
-}));
-
 function App() {
   const clientId = "e161d1dc280f418fa572dc25328e38d3";
   const redirectUrl = "https://spotify-favorites-viewer.web.app/favorites";
@@ -36,7 +26,6 @@ function App() {
       type: "dark",
     },
   });
-  const styles = useStyles(theme);
   return (
     <ThemeProvider theme={theme}>
       <ReactQueryConfigProvider config={reactQueryConfig}>
