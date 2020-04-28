@@ -10,13 +10,14 @@ import {
   Tab,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+
 import { useQuery } from "react-query";
 
 import Tracks from "./Tracks";
 import Artists from "./Artists";
 
 import { getFavoriteArtists, getFavoriteTracks } from "./spotifyAPI";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -32,14 +33,40 @@ const useStyles = makeStyles((theme) => ({
   select: {
     height: 48,
   },
-  logo: {
-    position: "fixed",
-    left: 10,
-    top: 10,
-  },
 }));
 
-const Favorites = () => {
+const Content = (aStatus, tStatus, tabValue, tracks, artists, url) => {
+  if (aStatus === "error" || tStatus === "error") {
+    return (
+      <>
+        <Grid container justify="center">
+          <Grid item>
+            <Typography color="secondary" variant="subtitle1" gutterBottom>
+              Session Expired. Click below to refresh
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container justify="center">
+          <Grid item>
+            <Button color="primary" href={url}>
+              Refresh
+            </Button>
+          </Grid>
+        </Grid>
+      </>
+    );
+  } else if (aStatus === "loading" || tStatus === "loading") {
+    return <CircularProgress />;
+  } else {
+    if (tabValue === 0) {
+      return <Tracks tracks={tracks} />;
+    } else {
+      return <Artists artists={artists} />;
+    }
+  }
+};
+
+const Favorites = ({ url }) => {
   const styles = useStyles();
   const [tabValue, setTabValue] = useState(0);
   const [timeRange, setTimeRange] = useState("short_term");
@@ -65,19 +92,16 @@ const Favorites = () => {
     setTabValue(newValue);
   };
 
-  const { data: artists } = useQuery({
+  const { data: artists, status: aStatus } = useQuery({
     queryKey: ["artists", timeRange],
     queryFn: getArtists,
   });
-  const { data: tracks } = useQuery({
+  const { data: tracks, status: tStatus } = useQuery({
     queryKey: ["tracks", timeRange],
     queryFn: getTracks,
   });
   return (
     <>
-      <Link to="/" component={Button} className={styles.logo}>
-        Home
-      </Link>
       <Grid container justify="center" className={styles.grid} spacing={2}>
         <Grid item xs={6}>
           <Paper>
@@ -104,17 +128,7 @@ const Favorites = () => {
         </Grid>
       </Grid>
       <Grid container spacing={2} justify="center" className={styles.grid}>
-        {tabValue === 0 ? (
-          tracks ? (
-            <Tracks tracks={tracks} />
-          ) : (
-            <CircularProgress />
-          )
-        ) : artists ? (
-          <Artists artists={artists} />
-        ) : (
-          <CircularProgress />
-        )}
+        {Content(aStatus, tStatus, tabValue, tracks, artists, url)}
       </Grid>
     </>
   );
