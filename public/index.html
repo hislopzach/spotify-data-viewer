@@ -17,5 +17,23 @@
   <body style="background: #222326;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyDMLHkvL13pw8S09YgOOkNTks_H1HBeEck",
+        authDomain: "spotify-favorites-viewer.firebaseapp.com",
+        databaseURL: "https://spotify-favorites-viewer.firebaseio.com",
+        projectId: "spotify-favorites-viewer",
+        storageBucket: "spotify-favorites-viewer.appspot.com",
+        messagingSenderId: "516511604016",
+        appId: "1:516511604016:web:70255c15ca2662a3ad3cf5",
+        measurementId: "G-V9NFXMCBJ4",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
   </body>
 </html>
