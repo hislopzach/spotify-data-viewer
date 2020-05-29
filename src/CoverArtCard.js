@@ -1,5 +1,10 @@
 import React from "react";
-import { Card, CardMedia, CardContent } from "@material-ui/core";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  CardActionArea,
+} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -23,14 +28,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CoverArtCard = ({ name, image, rank }) => {
+const CoverArtCard = ({ name, image, rank, uri }) => {
   const styles = useStyles();
 
   return (
     <Card className={styles.card}>
-      <CardMedia className={styles.media}>
-        <img className={styles.media} src={image} alt={name}></img>
-      </CardMedia>
+      <a href={uri}>
+        <CardActionArea>
+          <CardMedia
+            className={styles.media}
+            href={uri}
+            // onClick={() => window.open(uri, "_blank")}
+          >
+            <img className={styles.media} src={image} alt={name}></img>
+          </CardMedia>
+        </CardActionArea>
+      </a>
       <CardContent className={styles.cardDetails} style={{ padding: "4px" }}>
         <Typography variant="subtitle1">{`${rank}. ${name}`}</Typography>
       </CardContent>

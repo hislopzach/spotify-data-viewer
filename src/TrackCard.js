@@ -5,7 +5,14 @@ const TrackCard = ({ track, rank }) => {
   const name = `${track.name} - ${track.artists[0].name}`;
   const image = track.album.images[1].url;
 
-  return <CoverArtCard name={name} rank={rank} image={image} />;
+  return (
+    <CoverArtCard
+      name={name}
+      rank={rank}
+      uri={track.external_urls.spotify}
+      image={image}
+    />
+  );
 };
 
 export default TrackCard;
