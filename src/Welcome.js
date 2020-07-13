@@ -34,7 +34,8 @@ const Welcome = ({ url }) => {
         Favorites Viewer for Spotify
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-        View your favorite songs and artists. None of your data is stored, ever.
+        View your favorite songs and artists. None of your Spotify data is
+        stored, ever.
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         If Neil Diamond is your #1 artist of all time, that's between you and
@@ -46,7 +47,7 @@ const Welcome = ({ url }) => {
         href={url}
         className={styles.button}
       >
-        login with Spotify
+        Login with Spotify
       </Button>
       <Typography variant="subtitle2" className={styles.copyright}>
         Favorites Viewer for Spotify is not affiliated with Spotify. Spotify© is
