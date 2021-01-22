@@ -19,6 +19,7 @@ import { getFavoriteArtists, getFavoriteTracks } from "./spotifyAPI";
 import { authUrl } from "./config";
 import ErrorMessage from "./ErrorMessage";
 import { getTokenFromHash } from "./util";
+import TableView from "./TableView";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -43,7 +44,7 @@ const Content = (aStatus, tStatus, tabValue, tracks, artists, url) => {
     return <CircularProgress />;
   } else {
     if (tabValue === 0) {
-      return <Tracks tracks={tracks} />;
+      return <TableView />;
     } else {
       return <Artists artists={artists} />;
     }
