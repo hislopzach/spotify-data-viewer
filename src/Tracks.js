@@ -10,7 +10,6 @@ const Tracks = ({ tracks }) => {
           <TrackCard track={t} rank={index + 1} />
         </Grid>
       ))}
-      )}
     </>
   );
 };
