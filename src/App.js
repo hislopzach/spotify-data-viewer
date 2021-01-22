@@ -5,6 +5,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ReactQueryConfigProvider } from "react-query";
+import { authUrl } from "./config";
 import Favorites from "./Favorites";
 import Welcome from "./Welcome";
 
@@ -18,8 +19,6 @@ const reactQueryConfig = {
 };
 
 function App() {
-  const redirectUrl = "https://spotify-favorites-viewer.web.app/favorites";
-  const authUrl = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT}&redirect_uri=${redirectUrl}&scope=user-top-read&response_type=token`;
   const theme = createMuiTheme({
     palette: {
       type: "dark",
