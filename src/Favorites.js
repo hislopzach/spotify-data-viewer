@@ -69,7 +69,7 @@ const Favorites = () => {
     () => getFavoriteArtists(timeRange, token)
   );
   const { data: tracks, status: tStatus } = useQuery(
-    ["artists", timeRange],
+    ["tracks", timeRange],
     () => getFavoriteTracks(timeRange, token)
   );
 
