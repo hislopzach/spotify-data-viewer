@@ -5,8 +5,8 @@ import ArtistCard from "./ArtistCard";
 const Artists = ({ artists }) => {
   return (
     <>
-      {artists.items.map((a, index) => (
-        <Grid key={a.uri} item xs="auto">
+      {artists?.items?.map((a, index) => (
+        <Grid key={a?.uri} item xs="auto">
           <ArtistCard artist={a} rank={index + 1} />
         </Grid>
       ))}

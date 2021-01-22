@@ -5,8 +5,8 @@ import TrackCard from "./TrackCard";
 const Tracks = ({ tracks }) => {
   return (
     <>
-      {tracks.items.map((t, index) => (
-        <Grid key={t.uri} item xs="auto">
+      {tracks?.items?.map((t, index) => (
+        <Grid key={t?.uri} item xs="auto">
           <TrackCard track={t} rank={index + 1} />
         </Grid>
       ))}
