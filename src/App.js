@@ -9,7 +9,6 @@ import Favorites from "./Favorites";
 import Welcome from "./Welcome";
 
 import "./App.css";
-import TableView from "./TableView";
 import Footer from "./Footer";
 
 function App() {
@@ -25,9 +24,6 @@ function App() {
           <Switch>
             <Route path="/favorites">
               <Favorites url={authUrl} />
-            </Route>
-            <Route path="/table">
-              <TableView />
             </Route>
             <Route path="/">
               <Welcome url={authUrl} />
