@@ -50,8 +50,8 @@ const Welcome = ({ url }) => {
         Login with Spotify
       </Button>
       <Typography variant="subtitle2" className={styles.copyright}>
-        Favorites Viewer for Spotify is not affiliated with Spotify. Spotify© is
-        a trademark of Spotify AB.
+        Created by Zachary Hislop. Favorites Viewer for Spotify is not
+        affiliated with Spotify. Spotify© is a trademark of Spotify AB.
       </Typography>
     </div>
   );
