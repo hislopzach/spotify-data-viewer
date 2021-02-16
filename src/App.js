@@ -10,6 +10,7 @@ import Welcome from "./Welcome";
 
 import "./App.css";
 import TableView from "./TableView";
+import Footer from "./Footer";
 
 function App() {
   const theme = createMuiTheme({
@@ -34,6 +35,7 @@ function App() {
           </Switch>
         </Router>
       </Container>
+      <Footer />
     </ThemeProvider>
   );
 }

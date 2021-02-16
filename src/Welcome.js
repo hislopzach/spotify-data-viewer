@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   main: {
     backgroundColor: "#222326",
     textAlign: "center",
-    minHeight: "100vh",
+    minHeight: "95vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -49,10 +49,6 @@ const Welcome = ({ url }) => {
       >
         Login with Spotify
       </Button>
-      <Typography variant="subtitle2" className={styles.copyright}>
-        Favorites Viewer for Spotify is not affiliated with Spotify. Spotify© is
-        a trademark of Spotify AB.
-      </Typography>
     </div>
   );
 };
