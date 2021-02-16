@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Grid,
   CircularProgress,
@@ -54,11 +54,7 @@ const Favorites = () => {
   const styles = useStyles();
   const [tabValue, setTabValue] = useState(0);
   const [timeRange, setTimeRange] = useState("short_term");
-  const [token, setToken] = useState(getTokenFromHash(window.location.hash));
-
-  useEffect(() => {
-    setToken(window.location.hash);
-  }, []);
+  const [token] = useState(getTokenFromHash(window.location.hash));
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -69,7 +65,7 @@ const Favorites = () => {
     () => getFavoriteArtists(timeRange, token)
   );
   const { data: tracks, status: tStatus } = useQuery(
-    ["artists", timeRange],
+    ["tracks", timeRange],
     () => getFavoriteTracks(timeRange, token)
   );
 
