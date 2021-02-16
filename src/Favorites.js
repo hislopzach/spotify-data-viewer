@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Grid,
   CircularProgress,
@@ -19,7 +19,6 @@ import { getFavoriteArtists, getFavoriteTracks } from "./spotifyAPI";
 import { authUrl } from "./config";
 import ErrorMessage from "./ErrorMessage";
 import { getTokenFromHash } from "./util";
-import TableView from "./TableView";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -44,7 +43,7 @@ const Content = (aStatus, tStatus, tabValue, tracks, artists, url) => {
     return <CircularProgress />;
   } else {
     if (tabValue === 0) {
-      return <TableView />;
+      return <Tracks tracks={tracks} />;
     } else {
       return <Artists artists={artists} />;
     }
@@ -55,11 +54,7 @@ const Favorites = () => {
   const styles = useStyles();
   const [tabValue, setTabValue] = useState(0);
   const [timeRange, setTimeRange] = useState("short_term");
-  const [token, setToken] = useState(getTokenFromHash(window.location.hash));
-
-  useEffect(() => {
-    setToken(window.location.hash);
-  }, []);
+  const [token] = useState(getTokenFromHash(window.location.hash));
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
